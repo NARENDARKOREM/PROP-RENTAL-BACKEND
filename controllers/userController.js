@@ -119,7 +119,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-
+// Get All Users Controller
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
@@ -129,6 +129,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+// Get Single User by ID Controller
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -143,6 +144,17 @@ const getUserById = async (req, res) => {
   }
 };
 
+// Logout Controller
+const logoutUser = (req, res) => {
+  res.clearCookie("token");
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: "Failed to log out" });
+    }
+    res.status(200).json({ message: "User logged out successfully" });
+  });
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -150,4 +162,5 @@ module.exports = {
   deleteUser,
   getAllUsers,
   getUserById,
+  logoutUser
 };

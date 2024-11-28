@@ -9,5 +9,6 @@ router.put("/user/:id", authMiddleware.isAuthenticated, userController.updateUse
 router.delete("/user/:id", authMiddleware.isAuthenticated, userController.deleteUser);
 router.get("/all-users", authMiddleware.isAuthenticated, userController.getAllUsers);
 router.get("/single-user/:id", authMiddleware.isAuthenticated, userController.getUserById);
+router.post("/user/logout", authMiddleware.isAuthenticated, userController.logoutUser);
 
 module.exports = router;
