@@ -1,16 +1,16 @@
-const {DataTypes} = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../db");
 const User = require("./User");
-const Property = require("./Property")
+const Property = require("./Property");
 
-const Enquiry = sequelize.define("Enquiry",{
-    propertyTitle:{
+const Enquiry = sequelize.define("Enquiry", {
+    propertyTitle: {
         type: DataTypes.ENUM("villa", "villas", "flat-for-sale", "commercials-spaces", "TO-LET"),
-        allowNull:false,
+        allowNull: false,
     },
-    propertyImage:{
+    propertyImage: {
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull: false,
     },
     enquiryUsername: {
         type: DataTypes.STRING,
@@ -20,13 +20,15 @@ const Enquiry = sequelize.define("Enquiry",{
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isNumeric: true, 
-          len: [10, 15], 
+            isNumeric: true,
+            len: [10, 15],
         },
     },
-},{timestamps:true, paranoid: true});
+    userId: { type: DataTypes.INTEGER, allowNull: false, references: { model: User, key: 'id' } },
+    propertyId: { type: DataTypes.INTEGER, allowNull: false, references: { model: Property, key: 'id' } }
+}, { timestamps: true, paranoid: true });
 
-Enquiry.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" }); 
-Enquiry.belongsTo(Property, { foreignKey: "propertyId", onDelete: "CASCADE" }); 
+Enquiry.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
+Enquiry.belongsTo(Property, { foreignKey: "propertyId", onDelete: "CASCADE" });
 
 module.exports = Enquiry;

@@ -4,13 +4,21 @@ const Country = require('../models/Country');
 const addCountry = async (req, res) => {
     const { name, image, status } = req.body;
 
+    console.log('Current user:', req.user); // Add this line to log the user
+
+    if (req.user.userType !== 'admin') {
+        return res.status(403).json({ error: 'Permission denied' });
+    }
+
     try {
-        const country = await Country.create({ name, image, status });
+        const country = await Country.create({ name, image, status, userId: req.user.id });
         res.status(201).json({ message: 'Country added successfully', country });
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
 
 // Get All Countries
 const getAllCountries = async (req, res) => {
@@ -42,6 +50,10 @@ const updateCountry = async (req, res) => {
     const { id } = req.params;
     const { name, image, status } = req.body;
 
+    if (req.user.userType !== 'admin') {
+        return res.status(403).json({ error: 'Permission denied' });
+    }
+
     try {
         const country = await Country.findByPk(id);
         if (!country) {
@@ -51,6 +63,7 @@ const updateCountry = async (req, res) => {
         country.name = name;
         country.image = image;
         country.status = status;
+        country.userId = req.user.id; // Update userId
         await country.save();
 
         res.status(200).json({ message: 'Country updated successfully', country });
@@ -63,6 +76,10 @@ const updateCountry = async (req, res) => {
 const deleteCountry = async (req, res) => {
     const { id } = req.params;
     const { forceDelete } = req.query;
+
+    if (req.user.userType !== 'admin') {
+        return res.status(403).json({ error: 'Permission denied' });
+    }
 
     try {
         const country = await Country.findOne({ where: { id }, paranoid: false });

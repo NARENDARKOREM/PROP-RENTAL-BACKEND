@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 // Generate JWT
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: user.id, email: user.email, userType: user.userType }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
 };
@@ -12,7 +12,7 @@ const generateToken = (user) => {
 // Signup Controller
 const registerUser = async (req, res) => {
   const { username, email, password, userType } = req.body;
-
+  
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {

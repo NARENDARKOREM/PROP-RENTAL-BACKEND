@@ -25,6 +25,7 @@ const session = require('express-session');
 const userRoutes = require("./routes/userRoutes");
 const countryRoutes = require("./routes/countryRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
+const couponRoutes = require("./routes/couponRoutes");
 
 const app = express();
 const port = 3000;
@@ -42,6 +43,7 @@ app.use(session({
 app.use("/users", userRoutes);
 app.use("/countries", countryRoutes);
 app.use("/categories",categoryRoutes);
+app.use("/coupons", userRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');

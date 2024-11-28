@@ -1,5 +1,6 @@
-const {DataTypes}=require("sequelize");
-const sequelize=require("../db");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../db');
+const User = require('./User');
 
 const Payout = sequelize.define('Payout', {
     amount: { type: DataTypes.DECIMAL, allowNull: false },
@@ -9,6 +10,7 @@ const Payout = sequelize.define('Payout', {
     vendorMobile: { type: DataTypes.STRING },
     transferPhoto: { type: DataTypes.STRING },
     status: { type: DataTypes.ENUM('pending', 'completed', 'failed'), defaultValue: 'pending' },
-  },{timestamps:true,paranoid:true});
+    userId: { type: DataTypes.INTEGER, allowNull: false, references: { model: User, key: 'id' } }
+}, { timestamps: true, paranoid: true });
 
-  module.exports = Payout;
+module.exports = Payout;
