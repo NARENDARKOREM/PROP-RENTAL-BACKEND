@@ -2,14 +2,14 @@ const ExtraImage = require('../models/ExtraImage');
 
 // Add Extra Image
 const addExtraImage = async (req, res) => {
-    const { selectPropertyType, propertyImage, property360Image, status } = req.body;
+    const { selectPropertyType, propertyImage, property360Image, status, propertyId } = req.body;
 
     if (req.user.userType !== 'admin') {
         return res.status(403).json({ error: 'Permission denied' });
     }
 
     try {
-        const extraImage = await ExtraImage.create({ selectPropertyType, propertyImage, property360Image, status, userId: req.user.id });
+        const extraImage = await ExtraImage.create({ selectPropertyType, propertyImage, property360Image, status, userId: req.user.id, propertyId });
         res.status(201).json({ message: 'Extra Image added successfully', extraImage });
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
@@ -44,7 +44,7 @@ const getExtraImageById = async (req, res) => {
 // Update Extra Image
 const updateExtraImage = async (req, res) => {
     const { id } = req.params;
-    const { selectPropertyType, propertyImage, property360Image, status } = req.body;
+    const { selectPropertyType, propertyImage, property360Image, status, propertyId } = req.body;
 
     if (req.user.userType !== 'admin') {
         return res.status(403).json({ error: 'Permission denied' });
@@ -60,6 +60,7 @@ const updateExtraImage = async (req, res) => {
         extraImage.propertyImage = propertyImage;
         extraImage.property360Image = property360Image;
         extraImage.status = status;
+        extraImage.propertyId = propertyId; // Update propertyId
         extraImage.userId = req.user.id; // Update userId
         await extraImage.save();
 

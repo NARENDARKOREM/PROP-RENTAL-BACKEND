@@ -9,7 +9,7 @@ const Payout = sequelize.define('Payout', {
     transferType: { type: DataTypes.STRING },
     vendorMobile: { type: DataTypes.STRING },
     transferPhoto: { type: DataTypes.STRING },
-    status: { type: DataTypes.ENUM('pending', 'completed', 'failed'), defaultValue: 'pending' },
+    status: { type: DataTypes.ENUM('Pending', 'Completed', 'Failed'), defaultValue: 'Pending' },
     userId: { type: DataTypes.INTEGER, allowNull: false, references: { model: User, key: 'id' } }
 }, { timestamps: true, paranoid: true });
 

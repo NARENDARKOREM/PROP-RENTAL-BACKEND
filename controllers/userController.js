@@ -146,14 +146,17 @@ const getUserById = async (req, res) => {
 
 // Logout Controller
 const logoutUser = (req, res) => {
+  // console.log('Session data during logout:', req.session); // Debugging log
+  const username = req.session.user ? req.session.user.username : "User";
   res.clearCookie("token");
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ error: "Failed to log out" });
     }
-    res.status(200).json({ message: "User logged out successfully" });
+    res.status(200).json({ message: `${username} logged out successfully` });
   });
 };
+
 
 module.exports = {
   registerUser,

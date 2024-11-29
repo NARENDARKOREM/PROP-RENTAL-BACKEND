@@ -13,7 +13,7 @@ const Property = sequelize.define(
       type: DataTypes.ENUM("India", "Australia", "South Africa", "Sri Lanka", "Nepal"),
       allowNull: false,
     },
-    propertyStatus: { type: DataTypes.ENUM("publish", "unpublish"), allowNull: false },
+    propertyStatus: { type: DataTypes.ENUM("Published", "Unpublished"), allowNull: false },
     propertyTotalPersonAllowed: { type: DataTypes.INTEGER, allowNull: false },
     fullAddress: { type: DataTypes.TEXT, allowNull: false },
     selectPropertyFacility: { type: DataTypes.TEXT },
@@ -23,7 +23,7 @@ const Property = sequelize.define(
     propertySQFT: { type: DataTypes.INTEGER, allowNull: false },
     propertyRating: { type: DataTypes.DECIMAL(2, 1) },
     selectPropertyType: {
-      type: DataTypes.ENUM("commercial spaces", "villas", "apartments", "individual houses", "fields"),
+      type: DataTypes.ENUM('Villa', 'Villas', 'Flat for Sale', 'Commercial spaces', 'TO-LET'),
       allowNull: false,
     },
     latitude: { type: DataTypes.DECIMAL(10, 8), allowNull: false },

@@ -8,7 +8,7 @@ const Package = sequelize.define('Package', {
     packageTotalPrice: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
     packageDescription: { type: DataTypes.TEXT },
     packageImage: { type: DataTypes.STRING },
-    packageStatus: { type: DataTypes.ENUM('publish', 'unpublish'), defaultValue: 'unpublish' },
+    packageStatus: { type: DataTypes.ENUM('Published', 'Unpublished'), defaultValue: 'Unpublished' },
     userId: { type: DataTypes.INTEGER, allowNull: false, references: { model: User, key: 'id' } }
 }, { timestamps: true, paranoid: true });
 

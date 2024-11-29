@@ -5,7 +5,7 @@ const User = require("./User");
 const Payment = sequelize.define('Payment', {
     gatewayName: { type: DataTypes.STRING, allowNull: false },
     gatewaySubtitle: { type: DataTypes.STRING },
-    status: { type: DataTypes.ENUM('publish', 'unpublish'), defaultValue: 'unpublish' },
+    status: { type: DataTypes.ENUM('Published', 'Unpublished'), defaultValue: 'Unpublished' },
     attributes: { type: DataTypes.JSON },
     showOnWallet: { type: DataTypes.BOOLEAN, defaultValue: false },
     showOnSubscribe: { type: DataTypes.BOOLEAN, defaultValue: false },

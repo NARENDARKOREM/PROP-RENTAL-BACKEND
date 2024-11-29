@@ -8,7 +8,7 @@ const Coupon = sequelize.define('Coupon', {
     code: { type: DataTypes.STRING, unique: true, allowNull: false },
     title: { type: DataTypes.STRING, allowNull: false },
     subtitle: { type: DataTypes.STRING },
-    status: { type: DataTypes.ENUM('publish', 'unpublish'), defaultValue: 'unpublish' },
+    status: { type: DataTypes.ENUM('Published', 'Unpublished'), defaultValue: 'Unpublished' },
     minOrderAmount: { type: DataTypes.DECIMAL },
     value: { type: DataTypes.DECIMAL, allowNull: false },
     description: { type: DataTypes.TEXT },

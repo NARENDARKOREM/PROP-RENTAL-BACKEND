@@ -5,7 +5,7 @@ const User = require('./User');
 const FAQ = sequelize.define('FAQ', {
     question: { type: DataTypes.STRING, allowNull: false },
     answer: { type: DataTypes.STRING, allowNull: false },
-    status: { type: DataTypes.ENUM('publish', 'unpublish'), defaultValue: 'unpublish' },
+    status: { type: DataTypes.ENUM('Published', 'Unpublished'), defaultValue: 'Unpublished' },
     userId: { type: DataTypes.INTEGER, allowNull: false, references: { model: User, key: 'id' } }
 }, { timestamps: true, paranoid: true });
 

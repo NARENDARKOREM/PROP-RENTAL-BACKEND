@@ -5,7 +5,7 @@ const Property = require("./Property");
 
 const Enquiry = sequelize.define("Enquiry", {
     propertyTitle: {
-        type: DataTypes.ENUM("villa", "villas", "flat-for-sale", "commercials-spaces", "TO-LET"),
+        type: DataTypes.ENUM('Villa', 'Villas', 'Flat for Sale', 'Commercial spaces', 'TO-LET'),
         allowNull: false,
     },
     propertyImage: {
